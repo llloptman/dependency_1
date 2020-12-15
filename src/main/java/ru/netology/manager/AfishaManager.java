@@ -16,6 +16,7 @@ public class AfishaManager {
         this.filmCount = filmCount;
     }
 
+
     public void add(Film item) {
         // создаём новый массив размером на единицу больше
         int length = films.length + 1;
@@ -37,25 +38,25 @@ public class AfishaManager {
 
     //Выдаем последние 10 записей, если меньше, то сколько есть в обратном порядке
     public Film[] getAll() {
+        Film[] result;
         if (films.length <= this.filmCount) {
-            Film[] result = new Film[films.length];
+            result = new Film[films.length];
             // перебираем массив в прямом порядке
             // но кладём в результаты в обратном
             for (int i = 0; i < result.length; i++) {
                 int index = films.length - i - 1;
                 result[i] = films[index];
             }
-            return result;
         } else {
-            Film[] result = new Film[this.filmCount];
+            result = new Film[this.filmCount];
             // перебираем массив в прямом порядке
             // но кладём в результаты в обратном
             for (int i = result.length - this.filmCount; i < result.length; i++) {
                 int index = films.length - i - 1;
                 result[i] = films[index];
             }
-            return result;
         }
+        return result;
     }
 
 }
