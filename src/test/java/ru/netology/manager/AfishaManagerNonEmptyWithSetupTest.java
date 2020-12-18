@@ -7,7 +7,7 @@ import ru.netology.domain.Film;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AfishaManagerTestNonEmptyWithSetup {
+public class AfishaManagerNonEmptyWithSetupTest {
     private AfishaManager manager = new AfishaManager();
     Film first = new Film(1, "Бладшот", "боевик", false);
     Film second = new Film(2, "Вперед", "мультфильм", false);

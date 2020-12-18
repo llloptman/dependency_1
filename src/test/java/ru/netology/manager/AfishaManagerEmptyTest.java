@@ -6,7 +6,7 @@ import ru.netology.domain.Film;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AfishaManagerTestEmpty {
+class AfishaManagerEmptyTest {
     private AfishaManager manager = new AfishaManager();
 
     @Test
