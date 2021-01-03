@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.Repository.AfishaRepository;
 import ru.netology.domain.Film;
 
-import static com.sun.tools.doclint.Entity.times;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -91,8 +90,6 @@ public class AfishaManagerNonEmptyWithSetupAndMocksTest {
 
     @Test
     void setAmountOfFilms() {
-        Film[] returned = new Film[]{third, forth, fifth, sixth, seventh, eighth, ninth, tenth, eleventh, twelve};
-        doReturn(returned).when(repository1).findAll();
         int actual = manager1.getAll().length;
         int expected = manager1.getFilmCount();
 
