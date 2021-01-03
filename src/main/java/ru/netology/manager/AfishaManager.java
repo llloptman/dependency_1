@@ -3,60 +3,53 @@ package ru.netology.manager;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.netology.Repository.AfishaRepository;
 import ru.netology.domain.Film;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class AfishaManager {
-    private Film[] films = new Film[0];
+    private AfishaRepository repository;
     private int filmCount = 10;
 
-    public AfishaManager(int filmCount){
-        this.filmCount = filmCount;
+//    public AfishaManager(AfishaRepository repository, int filmCount) {
+//        this.repository = repository;
+//        this.filmCount = filmCount;
+//    }
+
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
     }
 
-
-    public void add(Film item) {
-        // создаём новый массив размером на единицу больше
-        int length = films.length + 1;
-        Film[] tmp = new Film[length];
-        // itar + tab
-        // копируем поэлементно
-        // for (int i = 0; i < films
-        //.length; i++) {
-        //   tmp[i] = films
-        //  [i];
-        // }
-        System.arraycopy(films, 0, tmp, 0, films
-                .length);
-        // кладём последним наш элемент
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
-        films = tmp;
+    // Add film to Repository
+    public void add(Film film) {
+        repository.save(film);
     }
 
-    //Выдаем последние 10 записей, если меньше, то сколько есть в обратном порядке
+    //Get all films.
+    // 1) if there are less films than filmCount then array.length = number of films
+    // 2) if there are more films than filmCount then array.length = filmCount
+    // 3) inverted return
     public Film[] getAll() {
-        Film[] result;
-        if (films.length <= this.filmCount) {
-            result = new Film[films.length];
-            // перебираем массив в прямом порядке
-            // но кладём в результаты в обратном
-            for (int i = 0; i < result.length; i++) {
-                int index = films.length - i - 1;
-                result[i] = films[index];
+        Film[] allFilms = repository.findAll();
+        Film[] result = new Film[allFilms.length];
+        if (allFilms.length <= filmCount) {
+            for (int i = 0; i < allFilms.length; i++) {
+                int index = allFilms.length - 1 - i;
+                result[i] = allFilms[index];
             }
+            return result;
         } else {
-            result = new Film[this.filmCount];
-            // перебираем массив в прямом порядке
-            // но кладём в результаты в обратном
-            for (int i = result.length - this.filmCount; i < result.length; i++) {
-                int index = films.length - i - 1;
-                result[i] = films[index];
+            for (int i = 0; i < filmCount; i++) {
+                int index = filmCount - 1 - i;
+                result[i] = allFilms[index];
             }
         }
         return result;
     }
+
+    //Выдаем последние 10 записей, если меньше, то сколько есть в обратном порядке
+
 
 }
