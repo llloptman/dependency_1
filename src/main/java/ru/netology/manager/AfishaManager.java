@@ -33,20 +33,23 @@ public class AfishaManager {
     // 3) inverted return
     public Film[] getAll() {
         Film[] allFilms = repository.findAll();
-        Film[] result = new Film[allFilms.length];
+
         if (allFilms.length <= filmCount) {
+            Film[] result = new Film[allFilms.length];
             for (int i = 0; i < allFilms.length; i++) {
                 int index = allFilms.length - 1 - i;
                 result[i] = allFilms[index];
             }
             return result;
         } else {
+            Film[] result = new Film[filmCount];
             for (int i = 0; i < filmCount; i++) {
                 int index = filmCount - 1 - i;
                 result[i] = allFilms[index];
             }
+            return result;
         }
-        return result;
+
     }
 
     //Выдаем последние 10 записей, если меньше, то сколько есть в обратном порядке
